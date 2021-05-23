@@ -54,7 +54,8 @@ library Quiz {
 
   function getAnswer(_Quiz storage quiz, uint qid, address student) public view returns(string memory) {
     string memory ans = quiz.studentResponses[student][qid];
-    if(ans == '')
+    bytes memory checkAns = bytes(ans);
+    if(checkAns.length == 0)
       return '[]';
     else
       return ans;
