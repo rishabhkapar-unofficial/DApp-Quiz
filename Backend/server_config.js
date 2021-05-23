@@ -1,1 +1,3 @@
-exports.PORT = 5555;
+const SERVER_PORT = 5555;
+
+module.exports = { SERVER_PORT };
