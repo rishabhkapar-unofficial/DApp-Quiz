@@ -12,13 +12,9 @@ passport.use(new LocalStrategy(function(username, password, done) {
 }));
 
 passport.serializeUser((user, done) => {
-    return done(user._id);
+    return done(null, user._id);
 });
 
 passport.deserializeUser((id, done) => {
-    User.findById(id).exec().then((user) => {
-        if(!user)
-            return done(null, false);
-        return done(null, user);
-    });
+    User.findById(id).exec().then((user) => done(null, user));
 });

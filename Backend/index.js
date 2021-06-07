@@ -10,10 +10,6 @@ require('./authentication/passport-local');
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 app.use(Session({
   secret: 'MySecret',
@@ -23,6 +19,12 @@ app.use(Session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 
 app.use('/', require('./routes/index').router);
 
